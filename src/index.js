@@ -25,8 +25,13 @@ const typeDefs = gql`
     user: User
   }
 
+  input UserInfo{
+    username: String!, password: String!, age: Int
+  }
+
   type Mutation{
-    register: RegisterResponse!
+    register(UserInfo: UserInfo): RegisterResponse!
+    login(UserInfo: UserInfo): Boolean!
   }
 
 `;
@@ -36,7 +41,7 @@ const resolvers = {
         hello: ()=> 'hello World come on, I got it, i install nodemo in'
     },
     Mutation:{
-
+      login:()=> true,
       register: ()=> ({
         errors:[{
           field:"usernam",
